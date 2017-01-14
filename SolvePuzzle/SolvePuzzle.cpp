@@ -102,8 +102,38 @@ int main()
 {
 	SetPriorityClass(GetCurrentProcess(), BELOW_NORMAL_PRIORITY_CLASS);
 
+	ULONGLONG ullStart = GetTickCount64();
+
 	test();
 	//real();
+
+	ULONGLONG ullEnd = GetTickCount64();
+	ULONGLONG ms = ullEnd - ullStart;
+	if (ms > 1000) {
+		ULONGLONG sec = ms / 1000;
+		ms = ms % 1000;
+
+		if (sec > 60) {
+			ULONGLONG min = sec / 60;
+			sec = sec % 60;
+
+			if (min > 60) {
+				ULONGLONG hour = min / 60;
+				min = min % 60;
+
+				std::cout << hour << " hours ";
+			}
+
+			std::cout << min << " minutes ";
+		}
+
+		std::cout << sec << '.';
+	}
+	else {
+		std::cout << "0.";
+	}
+
+	std::cout << ms << " seconds." << std::endl;
 
     return 0;
 }
