@@ -13,6 +13,26 @@ Object::~Object()
 {
 }
 
+void Object::put(const char* shape, char id)
+{
+	size_t len = strlen(shape);
+	if (len > sizeof(bytes)) {
+		std::cerr << "too big shape." << std::endl;
+		exit(1);
+	}
+	if (len != width * height) {
+		std::cerr << "invalid shape." << std::endl;
+		exit(1);
+	}
+
+	for (int i = 0; i < len; ++i) {
+		if (shape[i] == '0')
+			bytes[i] = '0';
+		else
+			bytes[i] = id;
+	}
+}
+
 void Object::rotate(Object& dst) const
 {
 	dst.clear();

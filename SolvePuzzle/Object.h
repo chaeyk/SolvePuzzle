@@ -13,20 +13,7 @@ protected:
 		memset(bytes, '0', sizeof(bytes));
 	}
 
-	void put(const char* shape)
-	{
-		size_t len = strlen(shape);
-		if (len > sizeof(bytes)) {
-			std::cerr << "too big shape." << std::endl;
-			exit(1);
-		}
-		if (len != width * height) {
-			std::cerr << "invalid shape." << std::endl;
-			exit(1);
-		}
-
-		strcpy_s(bytes, shape);
-	}
+	void put(const char* shape, char id);
 
 	virtual void rotate(Object& dst) const;
 

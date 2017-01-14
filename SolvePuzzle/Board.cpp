@@ -36,14 +36,15 @@ bool Board::put(const Piece& piece, int x, int y, Board& dst) const
 	int pheight = piece.get_height();
 	for (int i = 0; i < pwidth; ++i) {
 		for (int j = 0; j < pheight; ++j) {
-			if (piece.at(i, j) == '0')
+			char id = piece.at(i, j);
+			if (id == '0')
 				continue;
 
 			if (dst.at(x + i, y + j) != '0') {
 				return false;
 			}
 
-			dst.at(x + i, y + j) = piece.get_num();
+			dst.at(x + i, y + j) = id;
 		}
 	}
 

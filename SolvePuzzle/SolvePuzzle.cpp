@@ -59,11 +59,12 @@ void test()
 	Board board(6, 4);
 	std::vector<Piece> pieces;
 
-	pieces.push_back(Piece(3, 2, '1', "111" "100"));
-	pieces.push_back(Piece(4, 2, '2', "1111" "0010"));
-	pieces.push_back(Piece(3, 2, '3', "111" "110"));
-	pieces.push_back(Piece(3, 2, '4', "001" "111"));
-	pieces.push_back(Piece(3, 4, '5', "111" "001" "001" "001"));
+	Piece::reset_id();
+	pieces.push_back(Piece(3, 2, "111" "100"));
+	pieces.push_back(Piece(4, 2, "1111" "0010"));
+	pieces.push_back(Piece(3, 2, "111" "110"));
+	pieces.push_back(Piece(3, 2, "001" "111"));
+	pieces.push_back(Piece(3, 4, "111" "001" "001" "001"));
 
 
 	if (solve(board, pieces, 0))
@@ -77,18 +78,19 @@ void real()
 	Board board(10, 6);
 	std::vector<Piece> pieces;
 
-	pieces.push_back(Piece(4, 2, '1', "1111" "0001"));
-	pieces.push_back(Piece(3, 2, '2', "101" "111"));
-	pieces.push_back(Piece(4, 2, '3', "1111" "0100"));
-	pieces.push_back(Piece(3, 3, '4', "111" "001" "001"));
-	pieces.push_back(Piece(4, 2, '5', "0011" "1110"));
-	pieces.push_back(Piece(3, 3, '6', "110" "010" "011"));
-	pieces.push_back(Piece(5, 1, '7', "11111"));
-	pieces.push_back(Piece(3, 3, '8', "110" "011" "001"));
-	pieces.push_back(Piece(3, 3, '9', "111" "010" "010"));
-	pieces.push_back(Piece(3, 3, '*', "010" "111" "010"));
-	pieces.push_back(Piece(3, 3, '#', "010" "011" "110"));
-	pieces.push_back(Piece(3, 2, '@', "111" "011"));
+	Piece::reset_id();
+	pieces.push_back(Piece(4, 2, "1111" "0001"));
+	pieces.push_back(Piece(3, 2, "101" "111"));
+	pieces.push_back(Piece(4, 2, "1111" "0100"));
+	pieces.push_back(Piece(3, 3, "111" "001" "001"));
+	pieces.push_back(Piece(4, 2, "0011" "1110"));
+	pieces.push_back(Piece(3, 3, "110" "010" "011"));
+	pieces.push_back(Piece(5, 1, "11111"));
+	pieces.push_back(Piece(3, 3, "110" "011" "001"));
+	pieces.push_back(Piece(3, 3, "111" "010" "010"));
+	pieces.push_back(Piece(3, 3, "010" "111" "010"));
+	pieces.push_back(Piece(3, 3, "010" "011" "110"));
+	pieces.push_back(Piece(3, 2, "111" "011"));
 
 	if (solve(board, pieces, 0))
 		std::cout << "SUCCESS!!" << std::endl;
@@ -100,8 +102,8 @@ int main()
 {
 	SetPriorityClass(GetCurrentProcess(), BELOW_NORMAL_PRIORITY_CLASS);
 
-	//test();
-	real();
+	test();
+	//real();
 
     return 0;
 }
