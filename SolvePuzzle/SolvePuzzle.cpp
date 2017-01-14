@@ -5,15 +5,10 @@
 #include "Board.h"
 #include "Piece.h"
 
-int64_t tried = 0;
+ULONGLONG tried = 0;
 
 bool solve(const Board& board, const std::vector<Piece>& pieces, int pieces_index)
 {
-	++tried;
-
-	if (tried % 100000 == 0)
-		std::cout << tried << std::endl;
-
 	if (pieces_index == pieces.size()) {
 		board.print();
 		return true;
@@ -35,6 +30,8 @@ bool solve(const Board& board, const std::vector<Piece>& pieces, int pieces_inde
 
 		for (int y = 0; y <= h; ++y) {
 			for (int x = 0; x <= w; ++x) {
+				++tried;
+
 				Board intermediate;
 				if (!board.put(rotated, x, y, intermediate))
 					continue;
@@ -50,6 +47,9 @@ bool solve(const Board& board, const std::vector<Piece>& pieces, int pieces_inde
 
 void test()
 {
+	tried = 0;
+	Piece::reset_id();
+
 	/*
 	111555
 	122225
@@ -59,7 +59,6 @@ void test()
 	Board board(6, 4);
 	std::vector<Piece> pieces;
 
-	Piece::reset_id();
 	pieces.push_back(Piece(3, 2, "111" "100"));
 	pieces.push_back(Piece(4, 2, "1111" "0010"));
 	pieces.push_back(Piece(3, 2, "111" "110"));
@@ -68,17 +67,19 @@ void test()
 
 
 	if (solve(board, pieces, 0))
-		std::cout << "SUCCESS!!" << std::endl;
+		std::cout << "SUCCESS!! - " << tried << " try." << std::endl;
 	else
-		std::cout << "FAILED!!" << std::endl;
+		std::cout << "FAILED!! - " << tried << " try." << std::endl;
 }
 
 void real()
 {
+	tried = 0;
+	Piece::reset_id();
+
 	Board board(10, 6);
 	std::vector<Piece> pieces;
 
-	Piece::reset_id();
 	pieces.push_back(Piece(4, 2, "1111" "0001"));
 	pieces.push_back(Piece(3, 2, "101" "111"));
 	pieces.push_back(Piece(4, 2, "1111" "0100"));
@@ -93,9 +94,9 @@ void real()
 	pieces.push_back(Piece(3, 2, "111" "011"));
 
 	if (solve(board, pieces, 0))
-		std::cout << "SUCCESS!!" << std::endl;
+		std::cout << "SUCCESS!! - " << tried << " try." << std::endl;
 	else
-		std::cout << "FAILED!!" << std::endl;
+		std::cout << "FAILED!! - " << tried << " try." << std::endl;
 }
 
 int main()
