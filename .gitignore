@@ -6,3 +6,4 @@ Release
 *.filters
 *.db
 *.opendb
+*.sdf
