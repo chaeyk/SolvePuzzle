@@ -30,11 +30,12 @@ bool solve(const Board& board, const std::vector<Piece>& pieces, int pieces_inde
 
 		for (int y = 0; y <= h; ++y) {
 			for (int x = 0; x <= w; ++x) {
-				++tried;
 
 				Board intermediate;
-				if (!board.put(rotated, x, y, intermediate))
+				if (!board.put(rotated, x, y, intermediate)) {
+					++tried;
 					continue;
+				}
 
 				if (solve(intermediate, pieces, pieces_index + 1))
 					return true;
@@ -105,8 +106,8 @@ int main()
 
 	ULONGLONG ullStart = GetTickCount64();
 
-	test();
-	//real();
+	//test();
+	real();
 
 	ULONGLONG ullEnd = GetTickCount64();
 	ULONGLONG ms = ullEnd - ullStart;
